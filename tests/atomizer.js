@@ -870,6 +870,7 @@ describe('Atomizer()', function () {
                         'display': '$0'
                     },
                     arguments: [{
+                        'b': 'block',
                         'n': 'none'
                     }]
                 },
@@ -884,10 +885,13 @@ describe('Atomizer()', function () {
                 }
             ]);
             var config = {
+                breakPoints: {
+                    sm: '@media screen and (min-width:700px)'
+                },
                 custom: {
                     'brand-color': '#400090'
                 },
-                classNames: ['parent_D(n)', 'D(n)', 'parent_C(brand-color)', 'C(brand-color)', 'parent_Foo', 'Foo']
+                classNames: ['parent_D(n)', 'D(n)', 'D(b)--sm', 'parent_C(brand-color)', 'C(brand-color)', 'parent_Foo', 'Foo']
             };
             // make sure parent selectors and helpers don't have the namespace
             // helpers should have their own namespace and parent should not have any
@@ -906,9 +910,14 @@ describe('Atomizer()', function () {
                 '}',
                 '.parent .parent_Foo, .atomic .Foo {',
                 '  font-weight: bold;',
+                '}',
+                '@media screen and (min-width:700px) {',
+                '  html#atomic .D\\(b\\)--sm {',
+                '    display: block;',
+                '  }',
                 '}\n'
             ].join('\n');
-            var result = atomizer.getCss(config, {namespace: '#atomic', helpersNamespace: '.atomic'});
+            var result = atomizer.getCss(config, {namespace: '#atomic', helpersNamespace: '.atomic', mediaNamespace: 'html#atomic'});
             expect(result).to.equal(expected);
         });
         it ('ignores invalid classnames', function () {

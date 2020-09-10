@@ -546,6 +546,8 @@ Atomizer.prototype.getCss = function (config/*:AtomizerConfig*/, options/*:CSSOp
                 if (!treeo.parent) {
                     if (rule.type === 'helper' && options.helpersNamespace) {
                         selector = [options.helpersNamespace, ' ', selector].join('');
+                    } else if (rule.type !== 'helper' && treeo.breakPoint && options.mediaNamespace) {
+                        selector = [options.mediaNamespace, ' ', selector].join('');
                     } else if (rule.type !== 'helper' && options.namespace) {
                         selector = [options.namespace, ' ', selector].join('');
                     }

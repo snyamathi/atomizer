@@ -36,6 +36,7 @@ Usage: atomizer [options] [path]
     -c, --config=[file]                 source config file if any.
     -r, --rules=[file]                  custom rules file (argument may be passed multiple times)
     -o, --outfile=[file]                destination config file.
+    -m, --mediaNamespace=[namespace]    adds the given namespace to all media query selectors.
     -n, --namespace=[namespace]         adds the given namespace to all generated Atomic CSS selectors.
     -H, --helpersNamespace=[namespace]  adds the given namespace to all helper selectors.
     -w, --watch=[target]                rebuilds when changes are detected in the file, directory, or glob (argument may be passed multiple times and is parsed for Atomic CSS classes)
